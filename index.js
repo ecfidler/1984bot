@@ -11,7 +11,7 @@ const client = new Client(); // ADD INTENTS
 
 // On ready
 client.once('ready', () => {
-	console.log('Good Morning!');
+	//console.log('Good Morning!');
     
     // Load commands
     commandManager.loadCommands(client);
