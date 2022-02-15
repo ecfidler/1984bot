@@ -1,0 +1,28 @@
+{
+  "name": "1984bot",
+  "version": "1.0.0",
+  "description": "a discord.js bot that violates server members privacy",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecfidler/1984bot-js.git"
+  },
+  "keywords": [
+    "discord",
+    "node",
+    "surveillence",
+    "joke"
+  ],
+  "author": "Ethan Fidler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ecfidler/1984bot-js/issues"
+  },
+  "homepage": "https://github.com/ecfidler/1984bot-js#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}

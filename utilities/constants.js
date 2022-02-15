@@ -1,0 +1,1 @@
+// constant values will be added here, likely guilds.
