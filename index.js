@@ -7,7 +7,7 @@ const commandManager = require('./utilities/command-manager.js');
 // const { GUILDS } = require('./utilities/constants');
 
 // Client Instance
-const client = new Client(); // ADD INTENTS
+const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`]});
 
 // On ready
 client.once('ready', () => {
@@ -31,6 +31,34 @@ client.on('interactionCreate', (interaction) => {
 });
 
 client.on('guildMemberAdd', (member) => {
+
+})
+
+client.on('messageCreate', (message) => {
+
+})
+
+client.on('messageDelete', (message) => {
+
+})
+
+client.on('messageReactionAdd', (messageReaction, user) => {
+
+})
+
+client.on('messageReactionRemove', (messageReaction, user) => {
+
+})
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+
+})
+
+client.on('typingStart', (typing) => {
+
+})
+
+client.on('voiceStateUpdate', (oldState, newState) => {
 
 })
 
