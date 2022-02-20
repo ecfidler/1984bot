@@ -4,6 +4,7 @@ const { Client, Intents } = require('discord.js');
 // Custom imports
 const auth = require('./auth.json');
 const commandManager = require('./utilities/command-manager.js');
+const { onVoiceStateUpdate } = require('./events/onVoiceStateUpdate.js')
 // const { GUILDS } = require('./utilities/constants');
 
 // Client Instance
@@ -17,7 +18,7 @@ client.once('ready', () => {
     commandManager.loadCommands(client);
 
     // Set presence
-    //client.user.setPresence({ activities: [{ type: "LISTENING", name: "the rain" }]});
+    client.user.setPresence({ activities: [{ type: "WATCHING", name: "everyone" }]});
 });
 
 client.on('interactionCreate', (interaction) => {
@@ -59,7 +60,7 @@ client.on('typingStart', (typing) => {
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-
+    onVoiceStateUpdate(client, oldState, newState)
 })
 
 // Login
