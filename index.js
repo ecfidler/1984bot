@@ -4,11 +4,11 @@ const { Client, Intents } = require('discord.js');
 // Custom imports
 const auth = require('./auth.json');
 const commandManager = require('./utilities/command-manager.js');
-const { onVoiceStateUpdate } = require('./events/onVoiceStateUpdate.js')
+const { onVoiceStateUpdate } = require('./events/onVoiceStateUpdate')
 // const { GUILDS } = require('./utilities/constants');
 
 // Client Instance
-const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`]});
+const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`, `GUILDS`, `GUILD_MESSAGE_REACTIONS`]});
 
 // On ready
 client.once('ready', () => {
@@ -60,7 +60,7 @@ client.on('typingStart', (typing) => {
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-    onVoiceStateUpdate(client, oldState, newState)
+    onVoiceStateUpdate(client, oldState, newState);
 })
 
 // Login
