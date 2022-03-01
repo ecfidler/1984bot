@@ -1,6 +1,6 @@
 // constant values will be added here, likely guilds. 🐼
 
-const DELAY = 60000;
+const DELAY = 180000;
 
 const PRESENCE_OPTIONS = [
     ["WATCHING", "everyone"],
