@@ -3,8 +3,10 @@ const { Client, Intents } = require('discord.js');
 
 // Custom imports
 const auth = require('./auth.json');
-const commandManager = require('./utilities/command-manager.js');
+const commandManager = require('./utilities/command-manager');
 const { onVoiceStateUpdate } = require('./events/onVoiceStateUpdate')
+const { refreshPresence } = require('./helpers/presenceHelper')
+const { DELAY } = require('./utilities/constants')
 // const { GUILDS } = require('./utilities/constants');
 
 // Client Instance
@@ -19,6 +21,11 @@ client.once('ready', () => {
 
     // Set presence
     client.user.setPresence({ activities: [{ type: "WATCHING", name: "everyone" }]});
+
+    // Start presence timeout
+    setInterval(() => {
+        refreshPresence(client);
+    }, DELAY);
 });
 
 client.on('interactionCreate', (interaction) => {
