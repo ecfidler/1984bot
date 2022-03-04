@@ -6,7 +6,8 @@ const auth = require('./auth.json');
 const commandManager = require('./utilities/command-manager');
 const { onVoiceStateUpdate } = require('./events/onVoiceStateUpdate')
 const { refreshPresence } = require('./helpers/presenceHelper')
-const { DELAY } = require('./utilities/constants')
+const { DELAY } = require('./utilities/constants');
+const { onMessageCreate } = require('./events/onMessageCreate');
 // const { GUILDS } = require('./utilities/constants');
 
 // Client Instance
@@ -40,35 +41,35 @@ client.on('interactionCreate', (interaction) => {
 
 client.on('guildMemberAdd', (member) => {
 
-})
+});
 
 client.on('messageCreate', (message) => {
-
-})
+    onMessageCreate(client, message);
+});
 
 client.on('messageDelete', (message) => {
 
-})
+});
 
 client.on('messageReactionAdd', (messageReaction, user) => {
 
-})
+});
 
 client.on('messageReactionRemove', (messageReaction, user) => {
 
-})
+});
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
 
-})
+});
 
 client.on('typingStart', (typing) => {
 
-})
+});
 
 client.on('voiceStateUpdate', (oldState, newState) => {
     onVoiceStateUpdate(client, oldState, newState);
-})
+});
 
 // Login
 client.login(auth.token);

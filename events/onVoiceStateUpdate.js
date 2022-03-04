@@ -9,13 +9,14 @@ function onVoiceStateUpdate(client, oldState, newState) {
 
     // Parse and send data
     let timestamp = Date.now();
-    let disconnect = false;
     let userId = newState.member.id;
+    let channel = newState.channelId;
     let type = 'join';
 
     // mute+, unmute+, deaf+, undeaf+, connect, disconnect+, move+, webcamon, webcamoff, streamon, streamoff 
     if (newState.channel == null) {
         type = 'disconnect';
+        channel = oldState.channelId;
     }
     else if (newState.channelId != oldState.channelId) { // not possible
         type = 'move';
@@ -82,6 +83,7 @@ function onVoiceStateUpdate(client, oldState, newState) {
     voiceEventPost({
         'user_id': userId,
         'type': type,
+        'channel': channel,
         'timestamp' : timestamp
     })
     */
