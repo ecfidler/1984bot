@@ -15,65 +15,57 @@ function onVoiceStateUpdate(client, oldState, newState) {
 
     // mute+, unmute+, deaf+, undeaf+, connect, disconnect+, move+, webcamon, webcamoff, streamon, streamoff 
     if (newState.channel == null) {
-        type = 'disconnect';
+        type = 'leave';
     }
     else if (newState.channelId != oldState.channelId) { // not possible
         type = 'move';
     }
     else if (newState.selfDeaf != oldState.selfDeaf) {
         if (newState.selfDeaf == true) {
-            type = 'selfDeaf';
+            type = 'deafen';
         }
         else if (newState.selfDeaf == false) {
-            type = 'unselfDeaf';
+            type = 'undeafen';
         }
     }
     else if (newState.serverDeaf != oldState.serverDeaf) {
         if (newState.serverDeaf == true) {
-            type = 'serverDeaf';
+            type = 'server deafen';
         }
         else if (newState.serverDeaf == false) {
-            type = 'unServerDeaf';
+            type = 'server undeafen';
         }
     }
     else if (newState.selfMute != oldState.selfMute) {
         if (newState.selfMute == true) {
-            type = 'selfMute';
+            type = 'mute';
         }
         else if (newState.selfMute == false) {
-            type = 'unSelfMute';
+            type = 'unmute';
         }
     }
     else if (newState.serverMute != oldState.serverMute) {
         if (newState.serverMute == true) {
-            type = 'serverMute';
+            type = 'server mute';
         }
         else if (newState.serverMute == false) {
-            type = 'unServerMute';
+            type = 'server unmute';
         }
     }
     else if (newState.selfVideo != oldState.selfVideo) {
         if (newState.selfVideo == true) {
-            type = 'webcamOn';
+            type = 'webcam start';
         }
         else if (newState.selfVideo == false) {
-            type = 'webcamOff';
-        }
-    }
-    else if (newState.serverDeaf != oldState.serverDeaf) {
-        if (newState.serverDeaf == true) {
-            type = 'serverDeaf';
-        }
-        else if (newState.serverDeaf == false) {
-            type = 'unServerDeaf';
+            type = 'webcam stop';
         }
     }
     else if (newState.streaming != oldState.streaming) {
         if (newState.streaming == true) {
-            type = 'streamingOn';
+            type = 'stream start';
         }
         else if (newState.streaming == false) {
-            type = 'streamingOff';
+            type = 'stream stop';
         }
     }
 
