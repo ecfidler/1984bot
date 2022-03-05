@@ -16,22 +16,38 @@ function voiceEventPost(payload) {
     axiosPost('voice_event',payload);
 };
 
+function reactionEventPost(payload) {
+    axiosPost('reaction', payload);
+}
+
+function reactionEventDelete(payload) {
+    axiosDelete('reaction',payload);
+}
+
 // Axios functions
 
 function axiosPost(endpoint, payload) {
-    axios.post(url+endpoint, payload, { headers: { Authorization: authString }});
+    axios.post(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
+        console.error(err);
+    });
 };
 
 function axiosPut(endpoint, payload) {
-    axios.put(url+endpoint, payload, { headers: { Authorization: authString }}).then( (res) => {
-        console.log(res);
-    }).catch( err => {
+    axios.put(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
         console.error(err);
     });
 }
 
-function axiosPatch(endpoint) {
-    axios.patch(url+endpoint, { headers: { Authorization: authString }});
+function axiosPatch(endpoint, payload) {
+    axios.patch(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
+        console.error(err);
+    });
 }
 
-module.exports = { voiceEventPost, messageEventPut };
+function axiosDelete(endpoint, payload) {
+    axios.delete(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
+        console.error(err);
+    });
+}
+
+module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete };

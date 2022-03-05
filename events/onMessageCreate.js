@@ -1,17 +1,11 @@
-const { MessagePayload } = require('discord.js');
 const { messageEventPut } = require('./../helpers/apiHelper');
+const { getAttachments } = require('./../helpers/attachmentHelper');
+
 
 function onMessageCreate(client, message) {
     let replying_to = message.reference?.messageId;
 
-    let messageAttachments = [];
-
-    message.attachments.forEach(attachment => {
-        messageAttachments.push({
-            'msg_id': parseInt(attachment.id),
-            "url": attachment.url 
-        });
-    });
+    let messageAttachments = getAttachments(message);
 
     let payload = {
         "id": parseInt(message.id, 10),
