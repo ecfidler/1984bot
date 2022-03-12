@@ -1,7 +1,7 @@
 //const { updatePresence } = require('./../helpers/presenceHelper');
 const { voiceEventPost } = require('./../helpers/apiHelper');
 
-function onVoiceStateUpdate(client, oldState, newState) {
+function onVoiceStateUpdate(oldState, newState) {
 
     if (oldState.member.user.bot) {
         return;
@@ -9,8 +9,8 @@ function onVoiceStateUpdate(client, oldState, newState) {
 
     // Parse and send data
     let timestamp = Date.now();
-    let userId = parseInt(newState.member.id);
-    let channel = parseInt(newState.channelId);
+    let userId = newState.member.id;
+    let channel = newState.channelId;
     let type = 'join';
 
     // mute+, unmute+, deaf+, undeaf+, connect, disconnect+, move+, webcamon, webcamoff, streamon, streamoff 

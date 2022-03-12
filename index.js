@@ -12,10 +12,9 @@ const { onMessageUpdate } = require('./events/onMessageUpdate');
 const { onMessageDelete } = require('./events/onMessageDelete');
 const { onMessageCreate } = require('./events/onMessageCreate');
 const { onReactionAdd } = require('./events/onReactionAdd');
-
+const { onReactionRemove } = require('./events/onReactionDelete');
 
 const { DELAY } = require('./utilities/constants');
-const { onReactionDelete } = require('./events/onReactionDelete');
 
 // Client Instance
 const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`, `GUILDS`, `GUILD_MESSAGE_REACTIONS`]});
@@ -52,11 +51,11 @@ client.on('guildMemberAdd', (member) => {
 
 client.on('messageCreate', (message) => {
     console.log(message.id);
-    onMessageCreate(client, message);
+    onMessageCreate(message);
 });
 
 client.on('messageDelete', (message) => {
-    onMessageDelete(client, message);
+    onMessageDelete(message);
 });
 
 client.on('messageReactionAdd', (messageReaction, user) => {
@@ -68,7 +67,7 @@ client.on('messageReactionRemove', (messageReaction, user) => {
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    onMessageUpdate(client, oldMessage, newMessage);
+    onMessageUpdate(oldMessage, newMessage);
 });
 
 client.on('typingStart', (typing) => {
@@ -76,7 +75,7 @@ client.on('typingStart', (typing) => {
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-    onVoiceStateUpdate(client, oldState, newState);
+    onVoiceStateUpdate(oldState, newState);
 });
 
 // Login

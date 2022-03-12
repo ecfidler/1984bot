@@ -1,9 +1,9 @@
 const { messageEventPatch } = require('./../helpers/apiHelper');
 
-function onMessageDelete(client, message) {
+function onMessageDelete(message) {
     let payload = {
         "deleted": true,
-        "edited_timestamp": newMessage.editedTimestamp,
+        "deleted_timestamp": Date.now(),
     }
 
     messageEventPatch(message.id, payload);
