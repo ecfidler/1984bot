@@ -1,5 +1,6 @@
 const { messageEventPut, userPut, channelPut } = require('./../helpers/apiHelper');
-const { getAttachments } = require('./../helpers/attachmentHelper');
+const { getAttachments } = require('./../helpers/messageContentHelper');
+const { getMentions } = require('./../helpers/messageContentHelper');
 
 
 function onMessageCreate(message) {
@@ -7,7 +8,7 @@ function onMessageCreate(message) {
 
     let messageAttachments = getAttachments(message);
 
-    let mentions = getMentions(message.mentions);
+    let mentions = getMentions(message);
 
     let payload = {
         "id": message.id,
@@ -25,7 +26,7 @@ function onMessageCreate(message) {
     
     messageEventPut(message.id, payload).then( res => {
 
-        console.log(res);
+        //console.log(res);
 
         if (!res.data.user_exists) {
             newUser(message.member);
@@ -39,6 +40,10 @@ function onMessageCreate(message) {
 }
 
 function newUser(member) {
+
+    if (!member.user) {
+        return;
+    }
 
     let tag = member.user.tag;
 
@@ -61,15 +66,13 @@ function newChannel(channel) {
     payload = {
         "id": channel.id,
         "name": channel.name,
-        "category": channel.parent.name,
+        "category": channel.parent?.name,
         "thread": channel.isThread(),
     }
 
     channelPut(channel.id, payload);
 }
 
-function getMentions(mentions) {
-    return Array.from(mentions.users.keys()) + Array.from(mentions.roles.keys()); // CHECK THIS PLS;
-}
+
 
 module.exports = { onMessageCreate };

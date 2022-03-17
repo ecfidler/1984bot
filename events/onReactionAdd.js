@@ -5,7 +5,7 @@ function onReactionAdd(messageReaction, user) {
         "user_id": user.id,
         "msg_id": messageReaction.message.id,
         "emoji": messageReaction.emoji.name,
-        "timestamp": messageReaction.emoji.createdTimestamp,
+        "timestamp": Date.now(),
     };
     reactionEventPost(payload);
 }

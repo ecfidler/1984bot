@@ -1,4 +1,4 @@
-const { reactionEventRemove } = require('./../helpers/apiHelper');
+const { reactionEventDelete } = require('./../helpers/apiHelper');
 
 function onReactionRemove(messageReaction, user) {
     let payload = {
@@ -6,7 +6,7 @@ function onReactionRemove(messageReaction, user) {
         "msg_id": messageReaction.message.id,
         "emoji": messageReaction.emoji.name,
     };
-    reactionEventRemove(payload);
+    reactionEventDelete(payload);
 }
 
 module.exports = { onReactionRemove };
