@@ -18,21 +18,24 @@ function getMentions(message) {
     message.mentions.members.forEach( member => {
         ments.push({
             'msg_id': message.id,
-            'mention': member.id
+            'mention': member.id,
+            'type': 'member'
         });
     });
 
     message.mentions.roles.forEach( role => {
         ments.push({
             'msg_id': message.id,
-            'mention': role.id
+            'mention': role.id,
+            'type': 'role'
         });
     });
 
     if (message.mentions.everyone) {
         ments.push({
             'msg_id': message.id,
-            'mention': 'everyone'
+            'mention': 'everyone',
+            'type': 'role'
         });
     }
 
