@@ -13,6 +13,7 @@ const { onMessageDelete } = require('./events/onMessageDelete');
 const { onMessageCreate } = require('./events/onMessageCreate');
 const { onReactionAdd } = require('./events/onReactionAdd');
 const { onReactionRemove } = require('./events/onReactionDelete');
+const { onMemberUpdate } = require('./events/onMemberUpdate');
 
 const { DELAY } = require('./utilities/constants');
 
@@ -72,6 +73,10 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on('typingStart', (typing) => {
 
+});
+
+client.on('guildMemberChange', (oldMember, newMember) => {
+    memberUpdate(oldMember, newMember);
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {
