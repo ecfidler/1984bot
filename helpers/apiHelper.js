@@ -8,6 +8,10 @@ function channelPut(id, payload) {
     axiosSimplePut(`channel/${id}`, payload);
 }
 
+function channelPatch(id, payload) {
+    axiosPatch(`channel/${id}`, payload);
+}
+
 function messageEventPut(id, payload) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -79,4 +83,4 @@ function axiosDelete(endpoint, payload) {
     });
 }
 
-module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, userPatch, userPut, channelPut };
+module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, userPatch, userPut, channelPut, channelPatch };

@@ -6,8 +6,11 @@ function onMemberUpdate(oldMember, newMember) {
         return;
     }
 
-    if ((oldMember.username != newMember.username) || (oldMember.nickname != newMember.nickname)) {
-        let tag = newMember.user.tag;
+    if ((oldMember.username == newMember.username) && (oldMember.nickname == newMember.nickname)) {
+        return;
+    }
+
+    let tag = newMember.user.tag;
         payload = {
             "username": newMember.user.username,
             "nickname": newMember.displayName,
@@ -15,10 +18,6 @@ function onMemberUpdate(oldMember, newMember) {
         };
     
         userPatch(newMember.user.id, payload);
-    }
-
-
-    
 }
 
 module.exports = { onMemberUpdate };

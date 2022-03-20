@@ -16,6 +16,7 @@ const { onReactionRemove } = require('./events/onReactionDelete');
 const { onMemberUpdate } = require('./events/onMemberUpdate');
 
 const { DELAY } = require('./utilities/constants');
+const { onChannelUpdate } = require('./events/onChannelUpdate');
 
 // Client Instance
 const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`, `GUILDS`, `GUILD_MESSAGE_REACTIONS`]});
@@ -46,8 +47,8 @@ client.on('interactionCreate', (interaction) => {
     }
 });
 
-client.on('guildMemberAdd', (member) => {
-
+client.on('channelUpdate', (oldChannel, newChannel) => {
+    onChannelUpdate(oldChannel, newChannel);
 });
 
 client.on('messageCreate', (message) => {
