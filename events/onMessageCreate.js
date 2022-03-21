@@ -4,6 +4,10 @@ const { getMentions } = require('./../helpers/messageContentHelper');
 
 
 function onMessageCreate(message) {
+    if (!message.member?.user) {
+        return;
+    }
+
     let replying_to = message.reference?.messageId;
 
     let messageAttachments = getAttachments(message);
@@ -16,7 +20,7 @@ function onMessageCreate(message) {
         "content": message.cleanContent,
         "attachments": messageAttachments,
         "author": message.author.id,
-        "replying_to": (replying_to ? replying_to : -1),
+        "replying_to": (replying_to ? replying_to : null),
         "channel": message.channelId,
         "edited": false,
         "deleted": false,
@@ -24,24 +28,37 @@ function onMessageCreate(message) {
         "mentions": mentions,
     };
     
-    messageEventPut(message.id, payload).then( res => {
+    messageEventPutHandler(message, payload);
+}
 
-        //console.log(res);
+function messageEventPutHandler(message, payload) {
+    messageEventPut(message.id, payload).catch( err => {
+        console.error(err.response); // err.response = {missing_members..., missing_channels...}
 
-        if (!res.data.user_exists) {
-            newUser(message.member);
+        if (err.response?.status == 424) {
+            let localMembers = [message.member].concat(Array.from(message.mentions.members.values()));
+            let localChannels = [message.channel].concat(Array.from(message.mentions.channels.values()));
+
+            let userRequests = err.response.data.missing_members.map( memberId => {
+                return newMember(localMembers.find(member => member.id == memberId));
+            });
+
+            let channelRequests = err.response.data.missing_channels.map( channelId => {
+                return newChannel(localChannels.find(channel => channel.id == channelId));
+            });
+
+            Promise.all(userRequests.concat(channelRequests)).then(
+                () => {
+                    messageEventPut(message.id, payload);
+                }
+            );
         }
-        if (!res.data.channel_exists) {
-            newChannel(message.channel);
-        }
-    }).catch( err => {
-        console.error(err);
     });
 }
 
-function newUser(member) {
+function newMember(member) {
 
-    if (!member.user) {
+    if (!member?.user) {
         return;
     }
 
@@ -52,9 +69,12 @@ function newUser(member) {
         "username": member.user.username,
         "nickname": member.displayName,
         "numbers": tag.slice(tag.length-4),
+        "bot": member.user.bot,
     };
 
-    userPut(member.user.id, payload);
+
+
+    return userPut(member.user.id, payload);
 }
 
 function newChannel(channel) {
@@ -70,7 +90,7 @@ function newChannel(channel) {
         "thread": channel.isThread(),
     }
 
-    channelPut(channel.id, payload);
+    return channelPut(channel.id, payload);
 }
 
 

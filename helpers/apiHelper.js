@@ -5,7 +5,14 @@ url = 'https://api.whid.live/';
 authString = `Bearer ${auth.whidapi_token}`;
 
 function channelPut(id, payload) {
-    axiosSimplePut(`channel/${id}`, payload);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axiosPut(`channel/${id}`, payload);
+            resolve(res);
+        } catch(err) {
+            reject(err);
+        }
+    });
 }
 
 function channelPatch(id, payload) {
@@ -39,12 +46,19 @@ function reactionEventDelete(payload) {
     axiosDelete('reaction', payload);
 }
 
-function userPut(id, payload) {
-    axiosSimplePut(`user/${id}`, payload);
+function memberPut(id, payload) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axiosPut(`member/${id}`, payload);
+            resolve(res);
+        } catch(err) {
+            reject(err);
+        }
+    });
 }
 
-function userPatch(id, payload) {
-    axiosPatch(`user/${id}`, payload);
+function memberPatch(id, payload) {
+    axiosPatch(`member/${id}`, payload);
 }
 
 // Axios functions
@@ -83,4 +97,4 @@ function axiosDelete(endpoint, payload) {
     });
 }
 
-module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, userPatch, userPut, channelPut, channelPatch };
+module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, userPatch: memberPatch, userPut: memberPut, channelPut, channelPatch };
