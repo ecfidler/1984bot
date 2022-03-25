@@ -1,5 +1,6 @@
 //const { updatePresence } = require('./../helpers/presenceHelper');
 const { voiceEventPost } = require('./../helpers/apiHelper');
+const { newChannel, newMember } = require('./../helpers/newContextHelper');
 
 function onVoiceStateUpdate(oldState, newState) {
 
@@ -8,17 +9,16 @@ function onVoiceStateUpdate(oldState, newState) {
     }
 
     // Parse and send data
-    let timestamp = Date.now();
+    let timestamp = Date.now(); //new Date().toISOString()
     let userId = newState.member.id;
     let channel = newState.channelId;
     let type = 'join';
 
-    // mute+, unmute+, deaf+, undeaf+, connect, disconnect+, move+, webcamon, webcamoff, streamon, streamoff 
     if (newState.channel == null) {
         type = 'leave';
         channel = oldState.channelId;
     }
-    else if (newState.channelId != oldState.channelId) {
+    else if ((newState.channelId != oldState.channelId) && (oldState.channelId != null)) {
         type = 'move';
     }
     else if (newState.selfDeaf != oldState.selfDeaf) {
@@ -70,13 +70,45 @@ function onVoiceStateUpdate(oldState, newState) {
         }
     }
 
-    voiceEventPost({
-        'user_id': userId,
+    let payload = {
+        'member_id': userId,
         'type': type,
         'channel': channel,
         'timestamp' : timestamp
-    })
+    };
+
+    voiceEventPostHandler(oldState, newState, payload);
     
 };
+
+function voiceEventPostHandler(oldState, newState, payload) {
+    voiceEventPost(payload).catch( err => {
+        console.error(err.response); // err.response = {missing_members..., missing_channels...}
+
+        if (err.response?.status == 424) {
+            
+            let localMembers = [newState.member];
+            let localChannels = [newState.channel];
+
+            if (newState.channel != oldState.channel) {
+                localChannels.push(oldState.channel);
+            }
+
+            let userRequests = err.response.data.missing_members.map( memberId => {
+                return newMember(localMembers.find(member => member.id == memberId));
+            });
+
+            let channelRequests = err.response.data.missing_channels.map( channelId => {
+                return newChannel(localChannels.find(channel => channel.id == channelId));
+            });
+
+            Promise.all(userRequests.concat(channelRequests)).then(
+                () => {
+                    voiceEventPost(payload);
+                }
+            );
+        }
+    });
+}
 
 module.exports = { onVoiceStateUpdate };

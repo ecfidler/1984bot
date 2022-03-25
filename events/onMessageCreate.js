@@ -1,14 +1,25 @@
-const { messageEventPut, userPut, channelPut } = require('./../helpers/apiHelper');
+const { messageEventPut } = require('./../helpers/apiHelper');
 const { getAttachments } = require('./../helpers/messageContentHelper');
 const { getMentions } = require('./../helpers/messageContentHelper');
+const { newChannel, newMember } = require('./../helpers/newContextHelper');
 
 
-function onMessageCreate(message) {
+async function onMessageCreate(message) {
     if (!message.member?.user) {
         return;
     }
 
     let replying_to = message.reference?.messageId;
+
+    if (replying_to) {
+        await message.channel.messages.fetch(replying_to).then( msg => {
+            replying_to = msg.author.id;
+        }).catch( err => {
+            console.error(err);
+        });
+    }
+    
+
 
     let messageAttachments = getAttachments(message);
 
@@ -20,7 +31,7 @@ function onMessageCreate(message) {
         "content": message.cleanContent,
         "attachments": messageAttachments,
         "author": message.author.id,
-        "replying_to": (replying_to ? replying_to : null),
+        "replying_to": replying_to,
         "channel": message.channelId,
         "edited": false,
         "deleted": false,
@@ -55,44 +66,5 @@ function messageEventPutHandler(message, payload) {
         }
     });
 }
-
-function newMember(member) {
-
-    if (!member?.user) {
-        return;
-    }
-
-    let tag = member.user.tag;
-
-    payload = {
-        "id": member.id,
-        "username": member.user.username,
-        "nickname": member.displayName,
-        "numbers": tag.slice(tag.length-4),
-        "bot": member.user.bot,
-    };
-
-
-
-    return userPut(member.user.id, payload);
-}
-
-function newChannel(channel) {
-
-    if (!channel?.guild) {
-        return;
-    }
-
-    payload = {
-        "id": channel.id,
-        "name": channel.name,
-        "category": channel.parent?.name,
-        "thread": channel.isThread(),
-    }
-
-    return channelPut(channel.id, payload);
-}
-
-
 
 module.exports = { onMessageCreate };

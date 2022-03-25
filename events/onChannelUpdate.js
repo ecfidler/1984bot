@@ -2,7 +2,7 @@ const { channelPatch } = require('./../helpers/apiHelper');
 
 function onChannelUpdate(oldChannel, newChannel) {
 
-    if (!channel?.guild) {
+    if (!newChannel?.guild) {
         return;
     }
 
@@ -10,9 +10,11 @@ function onChannelUpdate(oldChannel, newChannel) {
         return;
     }
 
+    let cat = newChannel.parent?.name
+
     payload = {
         "name": newChannel.name,
-        "category": newChannel.parent?.name,
+        "category": cat ? cat : null
     }
 
     channelPatch(newChannel.id, payload);

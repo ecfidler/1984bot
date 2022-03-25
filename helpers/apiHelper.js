@@ -35,11 +35,18 @@ function messageEventPatch(id, payload) {
 }
 
 function voiceEventPost(payload) {
-    axiosPost('voice_event', payload);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axiosPost(`voice_event`, payload);
+            resolve(res);
+        } catch(err) {
+            reject(err);
+        }
+    });
 };
 
 function reactionEventPost(payload) {
-    axiosPost('reaction', payload);
+    axiosSimplePost('reaction', payload);
 }
 
 function reactionEventDelete(payload) {
@@ -64,6 +71,16 @@ function memberPatch(id, payload) {
 // Axios functions
 
 function axiosPost(endpoint, payload) {
+    return new Promise(async (resolve, reject) => {
+        axios.post(url+endpoint, payload, { headers: { Authorization: authString }}).then( res => {
+            resolve(res);
+        }).catch( err => {
+            reject(err);
+        });
+    });
+};
+
+function axiosSimplePost(endpoint, payload) {
     axios.post(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
         console.error(err);
     });
@@ -92,7 +109,7 @@ function axiosPatch(endpoint, payload) {
 }
 
 function axiosDelete(endpoint, payload) {
-    axios.delete(url+endpoint, payload, { headers: { Authorization: authString }}).catch( err => {
+    axios.delete(url+endpoint, { headers: { Authorization: authString }, data: payload }).catch( err => {
         console.error(err);
     });
 }
