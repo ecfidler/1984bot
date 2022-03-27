@@ -27,11 +27,21 @@ function newChannel(channel) {
         return;
     }
 
+    let type = "";
+    if (channel.type == "GUILD_TEXT") {
+        type = "text";
+    } else if (channel.type == "GUILD_VOICE") {
+        type = "voice";
+    } else {
+        return;
+    }
+
     payload = {
         "id": channel.id,
         "name": channel.name,
         "category": channel.parent?.name,
         "thread": channel.isThread(),
+        "type": type,
     }
 
     return channelPut(channel.id, payload);
