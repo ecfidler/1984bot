@@ -4,7 +4,16 @@ function getAttachments(message) {
     message.attachments.forEach( attachment => {
         attch.push({
             'msg_id': attachment.id,
-            'url': attachment.url
+            'url': attachment.url,
+            'sticker': false
+        });
+    });
+
+    message.stickers.forEach( sticker => {
+        attch.push({
+            'msg_id': sticker.id,
+            'url': sticker.url,
+            'sticker': true,
         });
     });
 
