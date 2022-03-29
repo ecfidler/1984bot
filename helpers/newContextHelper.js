@@ -28,7 +28,7 @@ function newChannel(channel) {
     }
 
     let type = "";
-    if (channel.type == "GUILD_TEXT") {
+    if (channel.type == "GUILD_TEXT" || channel.type == "GUILD_PUBLIC_THREAD" ) {
         type = "text";
     } else if (channel.type == "GUILD_VOICE") {
         type = "voice";
