@@ -1,4 +1,4 @@
-// constant values will be added here, likely guilds. 🐼
+// 🐼
 
 const DELAY = 180000;
 
@@ -17,4 +17,10 @@ const PRESENCE_OPTIONS = [
     ["WATCHING", "TV thru your window"]
 ];
 
-module.exports = {DELAY, PRESENCE_OPTIONS}
+const LOW_ROLE_NAME = "blongs";
+const MID_ROLE_NAME = "sivler";
+const HIGH_ROLE_NAME = "gold";
+
+const SCOREHOOK_ID = "952653562851237908"; // whid: "952653562851237908"; // test: "958803469001703444";
+
+module.exports = { DELAY, PRESENCE_OPTIONS, SCOREHOOK_ID, LOW_ROLE_NAME, MID_ROLE_NAME, HIGH_ROLE_NAME }

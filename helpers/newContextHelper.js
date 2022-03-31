@@ -1,4 +1,4 @@
-const { userPut, channelPut } = require('./../helpers/apiHelper');
+const { memberPut, channelPut } = require('./../helpers/apiHelper');
 
 function newMember(member) {
 
@@ -18,7 +18,7 @@ function newMember(member) {
 
 
 
-    return userPut(member.user.id, payload);
+    return memberPut(member.user.id, payload);
 }
 
 function newChannel(channel) {

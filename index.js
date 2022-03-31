@@ -14,9 +14,11 @@ const { onMessageCreate } = require('./events/onMessageCreate');
 const { onReactionAdd } = require('./events/onReactionAdd');
 const { onReactionRemove } = require('./events/onReactionDelete');
 const { onMemberUpdate } = require('./events/onMemberUpdate');
-
-const { DELAY } = require('./utilities/constants');
 const { onChannelUpdate } = require('./events/onChannelUpdate');
+
+const { updateRoles } = require('./helpers/roleUpdateHelper');
+
+const { DELAY, SCOREHOOK_ID } = require('./utilities/constants');
 
 // Client Instance
 const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`, `GUILDS`, `GUILD_MESSAGE_REACTIONS`]});
@@ -54,6 +56,11 @@ client.on('channelUpdate', (oldChannel, newChannel) => {
 client.on('messageCreate', (message) => {
     console.log(message.id);
     onMessageCreate(message);
+
+    if(message.webhookId == SCOREHOOK_ID) {
+        console.log("BINGO");
+        updateRoles(message);
+    }
 });
 
 client.on('messageDelete', (message) => {
@@ -76,8 +83,9 @@ client.on('typingStart', (typing) => {
 
 });
 
-client.on('guildMemberChange', (oldMember, newMember) => {
-    memberUpdate(oldMember, newMember);
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+    onMemberUpdate(oldMember, newMember);
+    console.log("ok!");
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {

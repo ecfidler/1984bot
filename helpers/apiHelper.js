@@ -114,4 +114,4 @@ function axiosDelete(endpoint, payload) {
     });
 }
 
-module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, userPatch: memberPatch, userPut: memberPut, channelPut, channelPatch };
+module.exports = { voiceEventPost, messageEventPut, messageEventPatch, reactionEventPost, reactionEventDelete, memberPatch, memberPut, channelPut, channelPatch };
