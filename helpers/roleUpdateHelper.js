@@ -1,4 +1,5 @@
-const { LOW_ROLE_NAME, MID_ROLE_NAME, HIGH_ROLE_NAME } = require('../utilities/constants');
+const { LOW_ROLE_NAME, MID_ROLE_NAME, HIGH_ROLE_NAME, GENERAL_ID } = require('../utilities/constants');
+const { MessageEmbed } = require('discord.js');
 
 async function updateRoles(message) {
     const data = JSON.parse(message.content);
@@ -32,7 +33,11 @@ async function updateRoles(message) {
 
     updateMemberTierRoles(extraMembers, [midRole, highRole], lowRole);
     
+    const alertChannel = message.guild.channels.fetch(GENERAL_ID);
 
+    if (alertChannel) {
+        await alertChannel.send({ embeds: [announcementEmbed()]});
+    }
 };
 
 function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
@@ -50,6 +55,15 @@ function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
             .catch(console.error);
         
     });
+}
+
+function announcementEmbed() {
+    const embed = new MessageEmbed()
+        .setColor("RED")
+        .setTitle("📣 Attention \"what have i done\" 📣")
+        .setDescription("Your new Social Credit Scores have been released! 🎉 View yours on [whid.live/score](https://whid.live/score) and adjust your behavior as necessary 😄  We hope you have a productive and agreeable week! 📆")
+        .setFooter(`Date Computed: ${Date.toISOString()}`);
+    return embed;
 }
 
 module.exports = { updateRoles };
