@@ -62,7 +62,7 @@ function announcementEmbed() {
         .setColor("RED")
         .setTitle("📣 Attention \"what have i done\" 📣")
         .setDescription("Your new Social Credit Scores have been released! 🎉 View yours on [whid.live/score](https://whid.live/score) and adjust your behavior as necessary 😄  We hope you have a productive and agreeable week! 📆")
-        .setTimestamp(message.createdAt)
+        .setFooter({text: `Date Computed: ${Date.toISOString()}`})
     return embed;
 }
 
