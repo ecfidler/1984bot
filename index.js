@@ -57,10 +57,15 @@ client.on('messageCreate', (message) => {
     console.log(message.id);
     onMessageCreate(message);
 
-    if(message.webhookId == SCOREHOOK_ID) {
+    if (message.channel.id == "952654250796810240") {
         console.log("BINGO");
         updateRoles(message);
     }
+
+    // if(message.webhookId == SCOREHOOK_ID) {
+    //     console.log("BINGO");
+    //     updateRoles(message);
+    // }
 });
 
 client.on('messageDelete', (message) => {

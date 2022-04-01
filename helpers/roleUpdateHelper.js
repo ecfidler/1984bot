@@ -15,14 +15,19 @@ async function updateRoles(message) {
     console.log("//");
     console.log("high: ");
     const highMembers = message.guild.members.cache.filter( member => data.high.includes(member.id) );
+    console.log(highMembers);
     updateMemberTierRoles(highMembers, [lowRole, midRole], highRole);
     
     console.log("mid: ");
     const midMembers = message.guild.members.cache.filter( member => data.mid.includes(member.id) );
+    console.log(midMembers);
+
     updateMemberTierRoles(midMembers, [lowRole, highRole], midRole);
 
     console.log("low: ");
     const lowMembers = message.guild.members.cache.filter( member => data.low.includes(member.id) );
+    console.log(lowMembers);
+
     updateMemberTierRoles(lowMembers, [midRole, highRole], lowRole);
 
     console.log("low (etc): ");
@@ -33,13 +38,15 @@ async function updateRoles(message) {
 
     updateMemberTierRoles(extraMembers, [midRole, highRole], lowRole);
     
-    message.guild.channels.fetch(GENERAL_ID).then( channel => { // 674689826976694276 GENERAL_ID
+    await message.guild.channels.fetch(GENERAL_ID, { force: true }).then( channel => { // 674689826976694276 GENERAL_ID
+        console.log(channel);
         channel.send({ embeds: [announcementEmbed()]});
     });
 };
 
 function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
     members.forEach(member => {
+        console.log(`Processing member ${member.user.username}`);
         member.roles.remove(rolesToRemove)
             .then(() => {
                 console.log(`Removed ${rolesToRemove.map(role => role.name)} from ${member.user.username}`)
