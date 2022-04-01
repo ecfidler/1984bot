@@ -37,11 +37,11 @@ async function updateRoles(message) {
     const extraMembers = message.guild.members.cache.difference(processedMembers);
 
     updateMemberTierRoles(extraMembers, [midRole, highRole], lowRole);
-    
-    await message.guild.channels.fetch(GENERAL_ID, { force: true }).then( channel => { // 674689826976694276 GENERAL_ID
-        console.log(channel);
-        channel.send({ embeds: [announcementEmbed()]});
-    });
+
+    await message.guild.channels.fetch(GENERAL_ID, { force: true })
+    let announcementChannel = message.guild.channels.cache.get(GENERAL_ID);
+    console.log(channel);
+    channel.send({ embeds: [announcementEmbed()]});
 };
 
 function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
