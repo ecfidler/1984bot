@@ -38,12 +38,12 @@ async function updateRoles(message) {
 
     updateMemberTierRoles(extraMembers, [midRole, highRole], lowRole);
 
-    // await message.guild.channels.fetch(GENERAL_ID, { force: true }).then( channel => { // 674689826976694276 GENERAL_ID
-    //     console.log(channel);
-    //     channel.send({ embeds: [announcementEmbed()]});
-    // }).catch( err => {
-    //     console.log(err);
-    // });
+    await message.guild.channels.fetch(GENERAL_ID, { force: true }).then( channel => { // 674689826976694276 GENERAL_ID
+        console.log(channel);
+        channel.send({ embeds: [announcementEmbed()]});
+    }).catch( err => {
+        console.log(err);
+    });
 };
 
 function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
