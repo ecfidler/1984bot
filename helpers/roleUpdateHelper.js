@@ -33,11 +33,9 @@ async function updateRoles(message) {
 
     updateMemberTierRoles(extraMembers, [midRole, highRole], lowRole);
     
-    const alertChannel = message.guild.channels.fetch(GENERAL_ID);
-
-    if (alertChannel) {
-        await alertChannel.send({ embeds: [announcementEmbed()]});
-    }
+    message.guild.channels.fetch(GENERAL_ID).then( channel => { // 674689826976694276 GENERAL_ID
+        channel.send({ embeds: [announcementEmbed()]});
+    });
 };
 
 function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
@@ -62,7 +60,7 @@ function announcementEmbed() {
         .setColor("RED")
         .setTitle("📣 Attention \"what have i done\" 📣")
         .setDescription("Your new Social Credit Scores have been released! 🎉 View yours on [whid.live/score](https://whid.live/score) and adjust your behavior as necessary 😄  We hope you have a productive and agreeable week! 📆")
-        .setFooter({text: `Date Computed: ${Date.toISOString()}`})
+        .setFooter({text: `Date Computed: ${new Date().toISOString()}`})
     return embed;
 }
 
