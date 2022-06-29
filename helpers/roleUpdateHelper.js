@@ -31,7 +31,7 @@ async function updateRoles(message) {
     updateMemberTierRoles(lowMembers, [midRole, highRole], lowRole);
 
     console.log("low (etc): ");
-    const botMembers = message.guild.members.cache.filter( member => member.user.isBot );
+    const botMembers = message.guild.members.cache.filter( member => member.user.bot );
     const processedMembers = highMembers.concat(midMembers).concat(lowMembers).concat(botMembers);
 
     const extraMembers = message.guild.members.cache.difference(processedMembers);
