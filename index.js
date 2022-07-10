@@ -18,7 +18,7 @@ const { onChannelUpdate } = require('./events/onChannelUpdate');
 
 const { updateRoles } = require('./helpers/roleUpdateHelper');
 
-const { DELAY, SCOREHOOK_ID } = require('./utilities/constants');
+const { DELAY, SCOREHOOK_ID, MAJORS } = require('./utilities/constants');
 
 // Client Instance
 const client = new Client({intents: [`GUILD_MESSAGES`, `GUILD_MESSAGE_TYPING`, `GUILD_VOICE_STATES`, `GUILD_MEMBERS`, `GUILD_EMOJIS_AND_STICKERS`, `GUILDS`, `GUILD_MESSAGE_REACTIONS`]});
@@ -57,15 +57,23 @@ client.on('messageCreate', (message) => {
     console.log(message.id);
     onMessageCreate(message);
 
-    // if (message.channel.id == "952654250796810240") {
-    //     console.log("BINGO");
-    //     updateRoles(message);
-    // }
-
+    // Update roles with data from webhook
     if(message.webhookId == SCOREHOOK_ID) {
         console.log("BINGO");
-        updateRoles(message);
+        updateRoles(message.content, message.guild);
     }
+
+    // Update roles with data from manual override
+    if (
+        message.channel.id == "952654250796810240"
+        && message.content.startsWith('override: ')
+        && MAJORS.includes(message.author.id)
+    ) {
+        console.log("⚠ MANUAL OVERRIDE ⚠ TOO MUCH CRISPY DRIP IN THE DILDO ⚠");
+        const content = message.content.slice(10);
+        updateRoles(content, message.guild);
+    }
+
 });
 
 client.on('messageDelete', (message) => {
