@@ -36,7 +36,7 @@ const getTitle = () => {
             ? [choose(emojis), choose(emojis)]
             : Array(2).fill(choose(emojis));
 
-    const output = `${left_and_right_emojis[0]} ${combine(choose(text))} ${
+    const output = `${left_and_right_emojis[0]} ${choose(text)} ${
         left_and_right_emojis[1]
     }`;
     return output;
