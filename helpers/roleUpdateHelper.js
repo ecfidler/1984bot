@@ -12,6 +12,7 @@ const ZERO_WIDTH_SPACE = "​"; // I promise it's there
 const craziness = 0.5;
 
 const colors = ["RED", 0xeebbbb, 0xff0000, 0x550000, 0x550011, 0xecf];
+
 const getTitle = () => {
     const emojis =
         "📣 🫥 😷 🐼 🕵️ 👨‍🏭 ☠ 🧤 😈 🪡 👮 🎠 🪰 😱 🧊 🌄 🏚️ 🫂 ⌛ 📴 🇷🇸 🪆 ⚠️ 🚫 📵 🚷 🌀 🚼 🔜 🃏 ⚕️ 🏺 ⚱️ 🔏 ❤️‍🔥 🚢 🗽 📡 🪬 🪫 🧿 🦠 ♟️ ⛓️ 🗝️ 🌫️ 🦷 🗜️ 🎚️ 🎛️ 📻 📼 📟 🎞️ 😶‍🌫️ 🖲️ 🦌 🕋".split(
@@ -19,15 +20,11 @@ const getTitle = () => {
         );
     const text = [
         'Attention "what have i done"',
-        '̷̳̿̋ͅA̵̢̦̓͒ť̷̤̦t̴̯̏e̶̩͑͗n̵̰̾t̵̺͠ͅī̷̬o̵̧͔̐ń̷̞̀ ̴̜͆̎"̷̯͝w̴̦͖͋̆h̶͈̤̐̀a̵̖̐͋ť̷̠̳͛ ̴̪̅͗h̴͈͒a̵̝̔v̷̩́e̵̢̲͋͠ ̸̡̝̈́͝i̵̪̖̒ ̷̙̾͋d̵̠̈́o̵̤̒ṋ̸͋e̸͍̬͆͑"̸͓͒ ',
         "oh god what have i done",
-        "w̴̦͖͋̆h̶͈̤̐̀a̵̖̐͋ť̷̠̳͛ ̴̪̅͗h̴͈͒a̵̝̔v̷̩́e̵̢̲͋͠ ̸̡̝̈́͝i̵̪̖̒ ̷̙̾͋d̵̠̈́o̵̤̒ṋ̸͋e̸͍̬͆͑",
+        "on god what have i done",
         "what have i done..............",
-        "w̸̝̓ḣ̵̨å̴̙t̷̻͋ ̶̲̐h̴̲͂a̵̖̐v̷͔̅e̶̘͋ ̸̣̌ĩ̶̪ ̶̻̓d̵̤̆o̷̥͛n̶͚̚e̸̘̎..............",
         "what have you done",
-        "w̵̥̿̽h̷́͜a̵̩͒͆͜ť̸̥̈ ̸̙̾h̶̳̐̕a̸̦̲̓v̶̰̻̈͝ẽ̶̪ ̵͙̓̀y̴͙̱̐͝ö̸̙̏u̸̿͠ͅ ̴̂ͅḏ̶͔̊ó̷̪n̵̙͑e̴̳̩̍",
         "ATTENTION",
-        "♋︎⧫︎⧫︎♏︎■︎⧫︎♓︎□︎■︎ ⬥︎♒︎♋︎⧫︎ ♒︎♋︎❖︎♏︎ ♓︎ ♎︎□︎■︎♏︎", // 'Attention "what have i done"'
         '"enod i evah tahw" noitnettA',
     ];
 
@@ -41,6 +38,7 @@ const getTitle = () => {
     }`;
     return output;
 };
+
 const description = [
     `New social credit scores. ${choose([
         "😷",
@@ -71,35 +69,20 @@ const description = [
         ]
     )}) and adjust your behavior as necessary 😄  We hope you have a productive and agreeable week! 📆`,
 
-    "社会信\n大好きですね？\nおちんちん\n\nー[安倍晋三](https://whid.live/score)",
-    "Social Credit Scores[nYou can see yours on the site](https://whid.live/score)\nDo not be afraid",
-    "Y̴̚ͅȯ̵̞u̷̹̓ŗ̸̍ ̴̥͐n̶̛̮è̷͈w̷̯͌ ̸͕͋S̷͚̏o̶̓ͅč̷̘ì̶ͅȃ̷̟l̸͙̓ ̶̖̏C̷̪̐r̸͇̄è̶̝d̷̹͠ì̷̟ẗ̷́͜ ̷̞̓S̴̗̄c̸̳̀o̵̺̐r̴̹̔e̷̥̅š̷̳ ̶̦̃ĥ̸͕a̸̻̓v̶̘͠e̶͎̾ ̸͜͠b̵͙̓e̷̹͂ĕ̷̟ň̴̟ ̵̞̂r̵̈ͅe̵̥̒l̴̚ͅè̸͖a̶̜̔s̸̡̒e̶̜͝d̸̝̕!̵͓͋ 😶‍🌫️ ̶̦̈́ ̸̥͆V̴͉̅ȋ̶̪e̵̯̎ẅ̵̻́ ̵̞́y̶̮̆o̸̙̚u̵̯̽r̴̭̄s̶̙̃ ̸̣̓o̶͙͝n̶̳̔ ̴͓̊[ẁ̸̢h̴̼͝i̷̮͊d̷̨͑.̶͕̀l̵͕̏ḯ̷̜v̵͖̔e̵̞̽/̷̧̃ś̵̫c̴͎͌ő̶̺r̶̝̈́e̶͉̒](https://whid.live/score) ̵̝͝à̶̜n̸͕͂d̷̦͑ ̸̮̂ã̸͎d̸́͜j̴̘͘u̴͈͊ş̶̓t̵̺̑ ̴̉͜y̵̱̍ô̵̰u̷̡͒r̵̭̋ ̵̛̹b̴̯́ë̶̺h̶͔͆ḁ̸͐v̶̡̈́i̴̬͆o̵͓̓r̶̪͝ ̶̙̚a̴̭̋s̷̞̔ ̴̟͊n̶͕̂è̸̺c̶̪̀e̷̙̔s̶̨̕s̵̮͝ǎ̶̧r̶̤͝y̷̗̋ 😶‍🌫️ ̸̖̀ ̷̢͊ ̷̠̾W̶̻̅e̶̗͌ ̸̌͜h̴͎̅o̴̜͝p̴͔͝ȩ̸̾ ̷͉̚y̶̝͛ó̵ͅu̶̞̍ ̶̣͆h̷̯̒á̴̫v̶̆ͅȇ̵̹ ̴͓̒a̶̖͝ ̴̪̂p̷̬̈́r̵̹͋ò̶͔ḍ̸̂ù̴͜c̸̘͐ṫ̵̜ì̵̦v̷̥̐e̸̱͠ ̶̟̓a̴̩̎n̷̫̓d̵̝̿ ̴͇͌a̷̕͜g̴̡͋r̴̫̀e̷̖͊e̵̞͝a̵̼̕b̸͈͘ḷ̸̿é̷̯ ̶̨̒w̸̞̍e̴̦̓ẻ̸ͅk̸͔̎!̸͉͑ 😶‍🌫️",
+    "Social Credit Scores\n[You can see yours on the site](https://whid.live/score)\nOk",
+
     "Has your new Social Credit score been released? Can you view it on [whid.live/score](https://whid.live/score) and adjust your behavior? Can you have a productive and agreeable week?",
-    "⍓︎□︎︎◆︎︎❒︎︎ ■︎︎♏︎︎⬥︎︎ ⬧︎□︎︎♍︎︎♓︎︎♋︎︎●︎︎ ♍︎❒︎︎♏︎︎♎︎︎♓︎︎⧫︎︎ ⬧︎♍︎︎□︎︎❒︎︎♏︎︎⬧︎︎ ♒︎︎♋︎︎❖︎︎♏︎︎ ♌︎︎♏︎︎♏︎︎■︎︎ ❒︎︎♏︎︎●︎︎♏︎︎♋︎︎⬧︎︎♏︎︎♎︎︎✏︎︎ 🎉❖︎♓︎︎♏︎︎⬥︎︎ ⍓︎︎□︎︎◆︎︎❒︎︎⬧︎︎ □︎︎■︎︎ [⬥︎︎♒︎︎♓︎︎♎︎︎📬︎︎●︎︎♓︎︎❖︎︎♏︎︎📭︎︎⬧︎︎♍︎︎□︎︎❒︎︎♏︎︎](https://whid.live/score) ♋︎︎■︎︎♎︎︎ ♋︎︎♎︎︎🙰◆︎︎⬧︎︎⧫︎︎ ⍓︎︎□︎︎◆︎︎❒︎︎ ♌︎︎♏︎︎♒︎︎♋︎︎❖︎︎♓︎︎□︎︎❒︎︎ ♋︎︎⬧︎︎ ■︎︎♏︎︎♍︎︎♏︎︎⬧︎︎⬧︎︎♋︎︎❒︎︎⍓︎︎ 😄 ⬥︎♏︎︎ ♒︎︎□︎︎◻︎︎♏︎︎ ⍓︎︎□︎︎◆︎︎ ♒︎︎♋︎︎❖︎︎♏︎︎ ♋︎︎ ◻︎︎❒︎︎□︎︎♎︎︎◆︎︎♍︎︎⧫︎︎♓︎︎❖︎︎♏︎︎ ♋︎︎■︎︎♎︎︎ ♋︎︎♑︎︎❒︎︎♏︎︎♏︎︎♋︎︎♌︎︎●︎︎♏︎︎ ⬥︎︎♏︎︎♏︎︎🙵✏︎︎ 📆",
+    
     "🎉🎉🎉[#1 Victory Royale](https://whid.live/score)🎉🎉🎉\n😱😱😱💀💀💀",
 ];
-const getFooters = () => [
-    `Dȃ̷̟te Cô̵̰mpute̶̜͝d̸̝̕: ${new Date().toISOString()}`,
-    `Datè̷͈ Compu̷̹̓ted: 1970-01-01T00:00:00.000Z`,
-    `Date Cô̵̰mpuṫ̵̜ed: 2022-04-01T16:24:54.397Z`,
-    `Da̵̼̕te Comput̸̰͊ed̷͔̈: 2027-03-23-01T22:35:01.100Z`,
-    `Datè̷͈ Compooped: ${new Date().toISOString()}`,
-];
 
-// const presets = [
-//     {
-//         color: "RED",
-//         title: "",
-//         description: "",
-//         footer: "",
-//     },
-//     {
-//         color: "BLACK",
-//         title: ZERO_WIDTH_SPACE,
-//         description: ZERO_WIDTH_SPACE,
-//         footer: "",
-//     },
-// ];
+const getFooters = () => [
+    `Date Computed: ${new Date().toISOString()}`,
+    `Date Computed: 1970-01-01T00:00:00.000Z`,
+    `Date Computed: 2022-04-01T16:24:54.397Z`,
+    `Date Computed: 2027-03-23T22:35:01.100Z`,
+    `Date Compooped: ${new Date().toISOString()}`,
+];
 
 async function updateRoles(content, guild) {
     const data = JSON.parse(content);
@@ -156,7 +139,7 @@ async function updateRoles(content, guild) {
         .then((channel) => {
             // 674689826976694276 GENERAL_ID
             console.log(channel);
-            channel.send({ embeds: [announcementEmbed()] });
+            channel.send({ embeds: [buildAnnouncementEmbed()] });
         })
         .catch((err) => {
             console.log(err);
@@ -196,15 +179,7 @@ function updateMemberTierRoles(members, rolesToRemove, roleToAdd) {
     });
 }
 
-function announcementEmbed() {
-    // const embed = new MessageEmbed()
-    //     .setColor("RED")
-    //     .setTitle('📣 Attention "what have i done" 📣')
-    //     .setDescription(
-    //         "Your new Social Credit Scores have been released! 🎉 View yours on [whid.live/score](https://whid.live/score) and adjust your behavior as necessary 😄  We hope you have a productive and agreeable week! 📆"
-    //     )
-    //     .setFooter({ text: `Date Computed: ${new Date().toISOString()}` });
-
+function buildAnnouncementEmbed() {
     const embed = new MessageEmbed()
         .setColor(choose(colors))
         .setTitle(getTitle())
